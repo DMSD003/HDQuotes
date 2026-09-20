@@ -3,6 +3,7 @@ const { GoogleGenAI } = require('@google/genai');
 const fs = require('fs');
 const pdfDoc = require('pdfkit');
 const { ToWords } = require('to-words');
+const supabase = require('../../config/supabase');
 
 exports.upload = async (userId, imagesPath, mimeImagesType) => {
     
@@ -304,7 +305,8 @@ exports.pdfGen = async(userId, quoteId) => {
             doc.on("data", (chunk) => {chunks.push(chunk);});
             doc.on("end", () => {
                 const pdfBuffer = Buffer.concat(chunks);
-                fs.promises.writeFile(pdfPath, pdfBuffer);
+                //fs.promises.writeFile(pdfPath, pdfBuffer);
+                supabase.storage.from('pdfs').upload(pdfPath, pdfBuffer, {contentType: 'application/pdf'});
                 resolve(pdfBuffer);
             })
             doc.on("error", reject);

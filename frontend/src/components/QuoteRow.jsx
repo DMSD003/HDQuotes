@@ -21,7 +21,7 @@ const QuoteRow = ({quote, onDelete, onView, onEdit}) => {
 
     return (
         <li
-            className="relative flex items-center min-w-0 justify-between px-2 py-3 sm:py-2 border border-white/10 hover:bg-white/5 transition-colors"
+            className={`flex-wrap relative ${menuOpen ? 'z-50': ''} flex items-center min-w-0 justify-between px-2 py-3 sm:py-2 border border-white/10 hover:bg-white/5 transition-colors`}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onTouchCancel={handleTouchEnd}
@@ -42,7 +42,7 @@ const QuoteRow = ({quote, onDelete, onView, onEdit}) => {
                         className="fixed inset-0 z-10"
                         onClick={() => setMenuOpen(false)}
                     />
-                    <div className="absolute right-2 top-10 z-20 w-40 bg-white text-gray-800 rounded-lg shadow-xl border-gray-200 overflow-hidden">
+                    <div className="w-40 basis-full mt-2 right-2 top-10 bg-white text-gray-800 rounded-lg shadow-xl border-gray-200 overflow-hidden">
                         <button
                             onClick={() => { onEdit(quote.id); setMenuOpen(false);}}
                             className="w-full flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-200"

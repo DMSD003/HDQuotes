@@ -15,7 +15,6 @@ frontend/build/
 backend/dist
 
 # ====== Generated/uploded files =======
-backend/uploads/
 backend/pdfs/
 
 # ====== Logs =======

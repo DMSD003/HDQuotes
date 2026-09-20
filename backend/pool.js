@@ -3,11 +3,8 @@ require('dotenv').config();
 
 // Initialize the pool with .env's vairiables
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {rejectUnauthorized: false},
     max: 10, // Maximum number of connetions in the pool
     idleTimeoutMillis: 30000 // closes unused connections after 30 seconds
 });

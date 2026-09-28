@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const Login = () => {
 
@@ -27,7 +29,7 @@ const Login = () => {
         console.log("email:", email);
         console.log("password:", password);
         try{
-            const response = await fetch("http://localhost:5000/api/auth/login", {
+            const response = await fetch(`${process.env.VITE_API_URL}/api/auth/login`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json",},
                 body: JSON.stringify({
@@ -69,7 +71,7 @@ const Login = () => {
     // The forgot password function
         const handleForgotPass = async () => {
             try {
-                const response = await fetch("http://localhost:5000/api/auth/forgotpassword", {
+                const response = await fetch(`${process.env.VITE_API_URL}/api/auth/forgotpassword`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({email: email}),

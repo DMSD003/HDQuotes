@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import flags from 'react-phone-number-input/flags';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const Register = () => {
 
@@ -80,7 +82,7 @@ const Register = () => {
         }
         console.log(password1, phoneNumber);
         try {
-            const response = await fetch("http://localhost:5000/api/auth/register", 
+            const response = await fetch(`${process.env.VITE_API_URL}/api/auth/register`, 
                 {method: "POST",
                     headers: {
                         "Content-Type": "application/json",

@@ -3,6 +3,8 @@ import PdfPreview from "./pdfPreview";
 import QuoteForm from "./QuoteForm";
 import { Search } from 'lucide-react';
 import QuoteRow from "./QuoteRow";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const Sidebar = ({accessToken, isOpen, close}) => {
 
@@ -24,7 +26,7 @@ const Sidebar = ({accessToken, isOpen, close}) => {
     const fetchQuotes = async (searchTerm = "") => {
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:5000/api/scan/quotes?title=${encodeURIComponent(searchTerm)}`, {
+            const response = await fetch(`${process.env.VITE_API_URL}api/scan/quotes?title=${encodeURIComponent(searchTerm)}`, {
                 method: "GET",
                 headers: {
                     Authorization:  `Bearer ${accessToken}`
@@ -62,7 +64,7 @@ const Sidebar = ({accessToken, isOpen, close}) => {
             return newQuotes;
         });
 
-        const deleteResponse = await fetch(`http://localhost:5000/api/scan/quote/${quoteId}`, {
+        const deleteResponse = await fetch(`${process.env.VITE_API_URL}/api/scan/quote/${quoteId}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -77,7 +79,7 @@ const Sidebar = ({accessToken, isOpen, close}) => {
 
     const handleSeePdf = async (quoteId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/scan/quote/${quoteId}/pdf-file`, {
+            const response = await fetch(`${process.env.VITE_API_URL}/api/scan/quote/${quoteId}/pdf-file`, {
                 method: "GET",
                 headers: {Authorization: `Bearer ${accessToken}`}
             });
@@ -112,7 +114,7 @@ const Sidebar = ({accessToken, isOpen, close}) => {
 
     const handleEdit = async (quoteId) => {
         
-        const editResponse = await fetch(`http://localhost:5000/api/scan/quote/${quoteId}/edit`, {
+        const editResponse = await fetch(`${process.env.VITE_API_URL}/api/scan/quote/${quoteId}/edit`, {
             method: "GET",
             headers: { Authorization: `Bearer ${accessToken}`}
         });

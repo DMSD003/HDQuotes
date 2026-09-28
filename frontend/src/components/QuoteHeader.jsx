@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const QuoteHeader = ({quoteId, accessToken, showPreview}) => {
 
@@ -9,7 +11,7 @@ const QuoteHeader = ({quoteId, accessToken, showPreview}) => {
     useEffect(() => {
         const getDate = async () => {
 
-            const response = await fetch(`http://localhost:5000/api/scan/quoteDate/${quoteId}`, {
+            const response = await fetch(`${process.env.VITE_API_URL}/api/scan/quoteDate/${quoteId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${accessToken}`
@@ -39,7 +41,7 @@ const QuoteHeader = ({quoteId, accessToken, showPreview}) => {
 
     const handleUpdateValidity = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/scan/quoteDate/${quoteId}`, {
+            const response = await fetch(`${process.env.VITE_API_URL}/api/scan/quoteDate/${quoteId}`, {
                 method:"PUT",
                 headers:  {
                     Authorization: `Bearer ${accessToken}`,

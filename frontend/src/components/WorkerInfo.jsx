@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import dotenv from 'dotenv';
 dotenv.config();
 
 const WorkerInfo = ({accessToken}) => {
@@ -13,7 +12,7 @@ const[userInfo, setUserInfo] = useState({
     useEffect(() => {
         const getUserInfo = async () => {
             try {
-                const response = await fetch(`${process.env.VITE_API_URL}/api/auth/user`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/user`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${accessToken}`

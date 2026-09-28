@@ -6,8 +6,6 @@ import QuoteHeader from './QuoteHeader';
 import WorkerInfo from './WorkerInfo';
 import { ToWords } from 'to-words';
 import { createPortal } from 'react-dom';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const QuoteForm = ({data, quoteId, accessToken, close}) => {
 
@@ -99,7 +97,7 @@ const QuoteForm = ({data, quoteId, accessToken, close}) => {
          e.preventDefault();
          console.log(quoteId);
          try {
-             const saveResponse = await fetch(`${process.env.VITE_API_URL}/api/scan/save`, {
+             const saveResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/save`, {
                  method: "POST",
                  headers: {
                      "Authorization": `Bearer ${accessToken}`,
@@ -119,7 +117,7 @@ const QuoteForm = ({data, quoteId, accessToken, close}) => {
                 const {message, quoteIdEl} = saveResponseData;
                 console.log(quoteIdEl);
 
-                const pdfGenResponse = await fetch(`${process.env.VITE_API_URL}/api/scan/quote/${quoteIdEl}/pdf`, {
+                const pdfGenResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/quote/${quoteIdEl}/pdf`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${accessToken}`
@@ -191,7 +189,7 @@ const QuoteForm = ({data, quoteId, accessToken, close}) => {
 
     const savePrefernces = async () => {
         try {
-            const response = await fetch(`${process.env.VITE_API_URL}/api/scan/preferences/${quoteId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/preferences/${quoteId}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

@@ -5,8 +5,6 @@ import SendingOptions from './SendingOptions';
 import { Menu } from 'lucide-react';
 import Sidebar from './Sidebar';
 import { createPortal } from 'react-dom';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const CameraCapture = () => {
 
@@ -125,7 +123,7 @@ const CameraCapture = () => {
             formData.append("images", image);
         });
 
-        const response = await fetch(`${process.env.VITE_API_URL}/api/scan/upload`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/upload`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${accessToken}`

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import dotenv from 'dotenv'
 
 const ClientInfo = ({accessToken, quoteId, clientName, clientId, clientPhone, clientEmail}) => {
 
@@ -30,7 +29,7 @@ const ClientInfo = ({accessToken, quoteId, clientName, clientId, clientPhone, cl
         const getClient = async () => {
            
             try {
-                const response = await fetch("http://localhost:5000/api/scan/getClient", {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/getClient`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${accessToken}`
@@ -69,7 +68,7 @@ const ClientInfo = ({accessToken, quoteId, clientName, clientId, clientPhone, cl
 
     const updateQuoteClientId = async (quoteId, clientId) => {
        try {
-            await fetch (`http://localhost:5000/api/scan/quote/${quoteId}/client`, {
+            await fetch (`${import.meta.env.VITE_API_URL}/api/scan/quote/${quoteId}/client`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -84,7 +83,7 @@ const ClientInfo = ({accessToken, quoteId, clientName, clientId, clientPhone, cl
 
     const handleSaveNewClient = async () => {
         try {
-            const savingResponse = await fetch("http://localhost:5000/api/scan/client", {
+            const savingResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/client`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

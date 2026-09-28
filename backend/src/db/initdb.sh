@@ -12,30 +12,22 @@ else
     exit 1
 fi
 
-# 2 Retrive .env's datas
+# 2 Check DATABASE_URL
+if [ -z "DATABASE_URL" ]; then
+    echo "DATABASE_URL is not defined"
+    exit 1
+fi
 
-DB_HOST=${DB_HOST:-localhost}
-DB_PORT=${DB_PORT:-5432}
-DB_USER=${DB_USER}
-DB_NAME=${DB_NAME}
-export PGPASSWORD=${DB_PASSWORD}
-
-# 3 Drop the Data Base if exists
-dropdb --if-exists -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" "$DB_NAME"
-# 4 Create the Data Base
-createdb -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" "$DB_NAME"
 
 # 4 Injecting the shema.sql
 
 if [ -f schema.sql ]; then
-    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER"  -d "$DB_NAME" -f schema.sql
+    echo "Injecting the schema.sql "
+    psql psql -h aws-0-eu-west-2.pooler.supabase.com -p 5432 -U postgres.indackvifxfqhqvpiqhi -d postgres -f schema.sql
 
 else
     echo "schema file Not Found"
     exit 1
 fi
-
-# Drop 
-unset PGPASSWORD 
 
 echo -e "\n~~ End of the script ~~\n"

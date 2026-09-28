@@ -53,7 +53,7 @@ exports.createUser = async (name, email, passsword, phone) => {
  * 
  * @returns {Object} the user info and the token just created 
 */
-exports.loginUser = async(email, password) => {
+exports.loginUser = async (email, password) => {
 
     let result = await pool.query('SELECT * FROM users WHERE email=$1', [email]);
 

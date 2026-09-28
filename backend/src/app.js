@@ -5,7 +5,7 @@ const scanRoutes = require('./routes/scan.routes')
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173', // activate cors for my frontend
+    origin: ['http://localhost:5173', 'https://hdquotes-1.onrender.com'], // activate cors for my frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));

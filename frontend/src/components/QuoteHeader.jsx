@@ -9,7 +9,7 @@ const QuoteHeader = ({quoteId, accessToken, showPreview}) => {
     useEffect(() => {
         const getDate = async () => {
 
-            const response = await fetch(`${process.env.VITE_API_URL}/api/scan/quoteDate/${quoteId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/quoteDate/${quoteId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${accessToken}`

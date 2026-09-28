@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-dotenv.config();
+
 
 const WorkerInfo = ({accessToken}) => {
 

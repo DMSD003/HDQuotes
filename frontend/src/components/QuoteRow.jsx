@@ -39,7 +39,7 @@ const QuoteRow = ({quote, onDelete, onView, onEdit}) => {
             {menuOpen && (
                 <>
                     <div 
-                        className="fixed inset-0 z-10"
+                        className="fixed inset-0"
                         onClick={() => setMenuOpen(false)}
                     />
                     <div className="w-40 basis-full mt-2 right-2 top-10 bg-white text-gray-800 rounded-lg shadow-xl border-gray-200 overflow-hidden">

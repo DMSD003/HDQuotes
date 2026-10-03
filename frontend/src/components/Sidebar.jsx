@@ -24,7 +24,7 @@ const Sidebar = ({accessToken, isOpen, close}) => {
     const fetchQuotes = async (searchTerm = "") => {
         setIsLoading(true);
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}api/scan/quotes?title=${encodeURIComponent(searchTerm)}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/quotes?title=${encodeURIComponent(searchTerm)}`, {
                 method: "GET",
                 headers: {
                     Authorization:  `Bearer ${accessToken}`

@@ -138,7 +138,7 @@ const Sidebar = ({accessToken, isOpen, close}) => {
         )}
         <div className={`fixed top-0 left-0 h-full w-72 sm:w-80 z-40 bg-white/70 flex flex-col space-y-2 overflow-y-auto  items-center p-8 border border-white/90 rounded-3xl shadow-xl backdrop-blur-md overflow-auto transform transition-transform duration-300 ease-in-out
             ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
-            <img src="../../public/HdquoteIcon.png" alt="The-logo-of-the-app" className="w-23 relative top-11 h-14 self-start shadow-xl backdrop-blur-md focus:ring-2 focus-ring-blue-300 rounded rounded-full"/>
+            <img src="/HdquoteIcon.png" alt="The-logo-of-the-app" className="w-23 relative top-11 h-14 self-start shadow-xl backdrop-blur-md focus:ring-2 focus-ring-blue-300 rounded rounded-full"/>
             <button className="self-end w-8 mb-4 p-1 bg-white/15 border border-white/95 rounded-xl shadow-lg backdrop-blur-md font-medium text-base cursor-pointer duration-150 hover:-translate-y-0.8 active:translate-y-1 active:shadow-md" onClick={close} >x</button>
             <h3 className="text-lg font-bold font-['Poppins'] text-[#1F4F4A] sm:text-base md:text-base text-center">
                 HDquotes

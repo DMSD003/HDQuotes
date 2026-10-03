@@ -198,7 +198,7 @@ const CameraCapture = () => {
             </div>
             {capturedImages.length < 1 && images.length < 1  && (
                 <div className="astuce relative flex flex-col justify-center items-center">
-                <img src="../../public/HdquoteIcon.png" alt="Logo-of-the-app" className='w-50 h-30 text-center'/>
+                <img src="/HdquoteIcon.png" alt="Logo-of-the-app" className='w-50 h-30 text-center'/>
                     <h4 className="text-center text-xl font-bold font-['Poppins'] text-[#1F4F4A] mb-4">Astuce: prendre ou importer des photos claires avec un éclairage adéquat.</h4>
                 </div>
             )}

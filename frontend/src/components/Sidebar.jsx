@@ -77,7 +77,7 @@ const Sidebar = ({accessToken, isOpen, close}) => {
 
     const handleSeePdf = async (quoteId) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}}/api/scan/quote/${quoteId}/pdf-file`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/scan/quote/${quoteId}/pdf-file`, {
                 method: "GET",
                 headers: {Authorization: `Bearer ${accessToken}`}
             });

@@ -329,7 +329,7 @@ exports.getClient = async (userId) => {
 
 exports.saveClient = async (userId, name, email, phone) => {
 
-    const result = await pool.query('INSERT INTO client(user_id, name, client_phone, email) VALUES($1, $2, $3, $4) ON CONFLICT (user_id, name) DO UPDATE SET client_phone = EXCLUDED.client_phone email = EXCLUDED.email RETURNING id ', [userId, name, phone, email]);
+    const result = await pool.query('INSERT INTO client(user_id, name, client_phone, email) VALUES($1, $2, $3, $4) ON CONFLICT (user_id, name) DO UPDATE SET client_phone = EXCLUDED.client_phone, email = EXCLUDED.email RETURNING id ', [userId, name, phone, email]);
     const clientId = result.rows[0].id;
     console.log("ClientId: ", clientId);;
     return {clientId};

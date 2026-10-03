@@ -39,10 +39,10 @@ const QuoteRow = ({quote, onDelete, onView, onEdit}) => {
             {menuOpen && (
                 <>
                     <div 
-                        className="fixed inset-0"
+                        className="fixed inset-0 z-0"
                         onClick={() => setMenuOpen(false)}
                     />
-                    <div className="w-40 basis-full mt-2 right-2 top-10 bg-white text-gray-800 rounded-lg shadow-xl border-gray-200 overflow-hidden">
+                    <div className="relative z-10 w-40 basis-full mt-2 bg-white text-gray-800 rounded-lg shadow-xl border-gray-200 overflow-hidden">
                         <button
                             onClick={() => { onEdit(quote.id); setMenuOpen(false);}}
                             className="w-full flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-200"

@@ -252,7 +252,7 @@ exports.getPdfFile = async (req, res) => {
         console.log("Data of the pdf file to get: ", quoteId, userId);
 
         const pdfBuffer = await scanService.getPdfFile(quoteId, userId);
-        if(!result) {
+        if(!pdfBuffer) {
             return res.status(404).json({error: "PDF not found"});
         }
         res.set("Content-Type", "application/pdf");

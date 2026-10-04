@@ -299,14 +299,15 @@ exports.pdfGen = async(userId, quoteId) => {
 
         const pdfPath = `pdfs/quote-${quoteId}.pdf`;
         
-        await pool.query('INSERT INTO quote_pdf(quote_id, pdf_url) VALUES ($1, $2) ON CONFLICT (quote_id) DO UPDATE SET pdf_url = EXCLUDED.pdf_url',[quoteId, pdfPath]);
 
         return await new Promise((resolve, reject) => {
             doc.on("data", (chunk) => {chunks.push(chunk);});
-            doc.on("end", () => {
+            doc.on("end", async () => {
                 const pdfBuffer = Buffer.concat(chunks);
                 //fs.promises.writeFile(pdfPath, pdfBuffer);
-                supabase.storage.from('pdfs').upload(pdfPath, pdfBuffer, {contentType: 'application/pdf'});
+                const { error } = await supabase.storage.from('pdfs').upload(pdfPath, pdfBuffer, {contentType: 'application/pdf', upsert: true});
+                if (error) throw error;
+                await pool.query('INSERT INTO quote_pdf(quote_id, pdf_url) VALUES ($1, $2) ON CONFLICT (quote_id) DO UPDATE SET pdf_url = EXCLUDED.pdf_url',[quoteId, pdfPath]);
                 resolve(pdfBuffer);
             })
             doc.on("error", reject);
@@ -478,7 +479,8 @@ exports.getPdfFile = async (quoteId, userId) => {
         WHERE q.id = $1 AND q.user_id = $2
     `, [quoteId, userId]);
 
-    const pdfUrl = result.rows[0];
-    console.log(pdfUrl);
-    return { pdfUrl };
+    if (!result.rows[0]) return null;
+    const {data, error} = supabase.storage.from("pdfs").download(result.rows[0].pdf_url);
+    if (error) throw error;
+    return Buffer.from(await data.arrayBuffer());
 }

@@ -251,15 +251,14 @@ exports.getPdfFile = async (req, res) => {
         const userId = req.userId;
         console.log("Data of the pdf file to get: ", quoteId, userId);
 
-        const result = await scanService.getPdfFile(quoteId, userId);
+        const pdfBuffer = await scanService.getPdfFile(quoteId, userId);
         if(!result) {
             return res.status(404).json({error: "PDF not found"});
         }
-        const filePath = path.join(__dirname, "..", "..", result.pdfUrl.pdf_url);
-        console.log('file path: ', filePath);
-        res.sendFile(filePath);
+        res.set("Content-Type", "application/pdf");
+        res.send(pdfBuffer);
     } catch (error) {
-     console.log("error");
+     console.error("error");
      res.status(500).json({error: "Failed to retrieve PDF"});
     }
 };

@@ -470,7 +470,7 @@ exports.getQuoteForEdit = async (userId, quoteId) => {
  * @param {number} userId the ID of the user who generated the pdf 
  * 
  * @throws {error} If an error occurs durring the query exexution
- * @returns {Promise} 
+ * @returns {Promise}
 */
 exports.getPdfFile = async (quoteId, userId) => {
     const result = await pool.query(`
@@ -480,7 +480,7 @@ exports.getPdfFile = async (quoteId, userId) => {
     `, [quoteId, userId]);
 
     if (!result.rows[0]) return null;
-    const {data, error} = supabase.storage.from("pdfs").download(result.rows[0].pdf_url);
+    const {data, error} = await supabase.storage.from("pdfs").download(result.rows[0].pdf_url);
     console.log("data and result: ", data, result.rows[0].pdf_url);
     if (error) throw error;
     return Buffer.from(await data.arrayBuffer());

@@ -481,6 +481,7 @@ exports.getPdfFile = async (quoteId, userId) => {
 
     if (!result.rows[0]) return null;
     const {data, error} = supabase.storage.from("pdfs").download(result.rows[0].pdf_url);
+    console.log("data and result: ", data, result.rows[0].pdf_url);
     if (error) throw error;
     return Buffer.from(await data.arrayBuffer());
 }

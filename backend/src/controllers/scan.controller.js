@@ -258,7 +258,7 @@ exports.getPdfFile = async (req, res) => {
         res.set("Content-Type", "application/pdf");
         res.send(pdfBuffer);
     } catch (error) {
-     console.error("error");
+     console.error("Get pdf file failed: ", error);
      res.status(500).json({error: "Failed to retrieve PDF"});
     }
 };
